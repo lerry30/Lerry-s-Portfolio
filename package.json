@@ -1,0 +1,18 @@
+{
+  "name": "My Portfolio",
+  "version": "1.0.0",
+  "description": "Lerry's Portfolio",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "John Lerry R. Samson",
+  "license": "ISC",
+  "dependencies": {
+    "deep-email-validator": "^0.1.21",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "mongoose": "^7.3.2"
+  }
+}
