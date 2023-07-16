@@ -6,7 +6,7 @@ export const sendMessage = () => {
         const message = form.querySelector('.message');
         const formButton = form.querySelector('.send-btn');
 
-        const url = 'https://lerrysamsonbackend.cyclic.app/newmessage';
+        const url = 'https://johnlerryramossamson.cyclic.app/newmessage';
         
         formButton.addEventListener('click', async (ev) => {
             ev.preventDefault();
