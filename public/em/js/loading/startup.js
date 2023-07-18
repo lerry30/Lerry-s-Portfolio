@@ -11,15 +11,17 @@ document.body.insertAdjacentHTML('beforeend', `
 
 const loadingBackground = document.querySelector('.loading-background');
 document.body.style.overflow = 'hidden';
-document.addEventListener('keydown', disableKeyBoard);
+document.addEventListener('keydown', disableKeyBoardAndScroll);
+document.addEventListener('scroll', disableKeyBoardAndScroll);
 
 setTimeout(() => {
     loadingBackground.remove();
-    document.removeEventListener('keydown', disableKeyBoard);
+    document.removeEventListener('keydown', disableKeyBoardAndScroll);
+    document.removeEventListener('scroll', disableKeyBoardAndScroll);
     document.body.style.overflowY = 'auto';
 }, 4000);
 
-function disableKeyBoard(ev) {
+function disableKeyBoardAndScroll(ev) {
     ev.preventDefault();
     return false;
 }
