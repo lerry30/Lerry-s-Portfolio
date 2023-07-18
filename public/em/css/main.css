@@ -253,6 +253,8 @@ input:-webkit-autofill:active {
     border-radius: 2px;
     background-color: transparent;
     cursor: pointer;
+    padding: 4px 0;
+    font-size: 14px;
 }
 
 .contact form button:hover {

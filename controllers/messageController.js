@@ -34,7 +34,7 @@ const newMessage = async (req, res) => {
     } catch (error) {
         res.status(400).json({
             success: false,
-            error: `THE MESSAGE COULDN\'T BE SENT: ${ error.message }`,
+            error: error.message,
         });
     }
 };
