@@ -1,3 +1,5 @@
+import Throttle from '../utils/throttle.js';
+
 const form = document.querySelector('.contact .contact-form');
 const name = form.querySelector('.name');
 const email = form.querySelector('.email');
@@ -16,8 +18,8 @@ export const sendMessage = () => {
 function contactForm() {
     const url = 'https://lerrysamson.cyclic.app/newmessage';
     // const url = '/newmessage';
-    
-    formButton.addEventListener('click', async (ev) => {
+
+    const sendMessageWithInfo = async (ev) => {
         ev.preventDefault();
 
         const data = { 
@@ -36,7 +38,10 @@ function contactForm() {
             errorMessage.textContent = response?.error || 'Something went wrong.';
             modalFailed.showModal();
         }
-    });
+    }
+
+    const sendMessageThrottle = Throttle(sendMessageWithInfo);
+    formButton.addEventListener('click', sendMessageThrottle);
 }
 
 async function send(url, data) {
