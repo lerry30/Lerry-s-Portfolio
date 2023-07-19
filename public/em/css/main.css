@@ -147,6 +147,7 @@ main {
 }
 
 /* about */
+
 .about {
     display: flex;
     flex-direction: column;
@@ -189,6 +190,22 @@ main {
         rgb(0 0 0 / 0.6) 60%,
         rgb(0 0 0 /0)
     );
+}
+
+/* about me - skill set */
+
+.about .content .skill-set {
+    display: flex;
+    padding: 0 20px 60px;
+    gap: 20%;
+}
+
+.about .content ul {
+    list-style: none;
+}
+
+.about .content ul li {
+    padding: 10px 0;
 }
 
 /* contact */
@@ -331,7 +348,7 @@ footer .git-repo a:hover {
     z-index: 3;
 
     display: flex;
-    min-height: 140vh; /* <- */
+    min-height: 200vh; /* <- */
 }
 
 .loading-background svg {
