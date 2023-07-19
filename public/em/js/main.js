@@ -17,3 +17,9 @@ addEventListener('resize', () => {
 }); // to update page section properties
 
 addEventListener('scroll', highLightNavLink); // to highlight nav link that is active or currently displayed page section
+
+
+addEventListener('scroll', () => {
+    const pageTop = document.body.getBoundingClientRect().top;
+    sessionStorage.setItem('page-top', pageTop);
+});

@@ -328,12 +328,15 @@ footer .git-repo a:hover {
     left: 0;
     right: 0;
     bottom: 0;
-    z-index: 2;
+    z-index: 3;
+
+    display: flex;
+    min-height: 140vh; /* <- */
 }
 
 .loading-background svg {
     position: relative;
-    top: 50%;
+    top: calc(50%);
     left: 50%;
     transform: translate(-50%, -50%);
 }
@@ -406,7 +409,7 @@ footer .git-repo a:hover {
     border: none;
     border-radius: 6px;
     background-color: rgba(255, 255, 255, 0.092);
-    z-index: 3;
+    z-index: 2;
 
     padding: 20px;
     overflow: hidden;

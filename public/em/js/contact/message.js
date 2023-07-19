@@ -1,4 +1,5 @@
 import Throttle from '../utils/throttle.js';
+import { loadingScreen, removeLoading } from '../loading/load.js';
 
 const form = document.querySelector('.contact .contact-form');
 const name = form.querySelector('.name');
@@ -22,13 +23,17 @@ function contactForm() {
     const sendMessageWithInfo = async (ev) => {
         ev.preventDefault();
 
-        const data = { 
+        loadingScreen();
+
+        const data = {
             name: name.value, 
             email: email.value, 
             message: message.value 
         };
 
         const response = await send(url, data);
+        removeLoading();
+
         // console.log(response);
         if (response?.success) {
             modalSuccess.showModal();
