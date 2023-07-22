@@ -1,11 +1,12 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    text-decoration: none;
-    font-family: monospace;
+:root {
+    /* keep in mind that these values are dedicated for mobile view */
+    --header-width: 100px;
+    --header-height: 100%;
 
-    --mobile-sb-width: 100px;
+    --logo-size: 60px;
+
+    --container-padding: 0; /* desktop size */
+    --scroll-bar-width: 8px;
     
     /* text colors */
     --txt-prime: rgba(255, 255, 255, 0.857);
@@ -13,8 +14,30 @@
     --line-color: #32678887;
 }
 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    font-family: monospace;
+}
+
+/* 
+    z index
+        -2 canvas
+        -1 card images
+        0 all
+        1 header
+        2 dialog
+        3 loading
+*/
+
 html {
     scroll-behavior: smooth;
+}
+
+ul {
+    list-style: none;
 }
 
 body {
@@ -25,317 +48,24 @@ body {
     background-color: #031825;
 }
 
+/* highlight text for sections like project  and contact */
+.section-label {
+    color: var(--txt-highlight) !important;
+    padding: 10px;
+}
+
+.icon-link {
+    fill: var(--txt-prime);
+    width: 25px;
+    height: 25px;
+}
+
 .background { /* canvas */
     background-color: pink;
     width: 100%;
     height: 100vh;
     position: fixed;
-    z-index: -1;
-}
-
-header {
-    width: 100px;
-    height: 100%;
-    position: fixed;
-    top: 0;
-    right: 0;
-    overflow: hidden;
-    z-index: 1;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-}
-
-header nav {
-    padding: 10px;
-    width: 100%;
-}
-
-header nav ul {
-    list-style: none;
-}
-
-header nav ul li {
-    padding: 5px 0;
-    display: flex;
-    text-transform: uppercase;
-    justify-content: right;
-}
-
-/* header nav ul li .link {} */
-header nav ul li .link:hover {
-    color: var(--txt-highlight);
-}
-
-header nav ul li > * {
-    font-weight: bold;
-    color: var(--txt-prime);
-    padding: 10px;
-}
-
-header nav ul li .resume {
-    color: var(--txt-highlight);
-    border: 1px solid var(--txt-highlight);
-    border-radius: 4px;
-    padding: 10px;
-    /* margin-right: 10px; */
-}
-
-header nav ul li .move-nav {
-    color: var(--txt-prime);
-    border: none;
-    outline: none;
-    background-color: transparent;
-}
-
-header .line {
-    width: 1px;
-    height: 210px;
-    background-color: #fcfcfc9e;
-    margin-left: calc(100% - 20px);
-}
-
-main {
-    width: calc(100% - var(--mobile-sb-width));
-}
-
-.container {
-    min-height: 100vh;
-    color: white;
-    padding: 10px 0 0 10px;
-}
-
-/* section titles */
-
-.title-container {
-    display: flex;
-}
-
-.title-container h1 {
-    font-size: clamp(22px, 3vw, 2.2em);
-    color: var(--txt-prime);
-}
-
-.title-container .line {
-    height: 1px;
-    flex-grow: 1;
-    background-color: var(--line-color);
-    margin: auto 0 auto 8px;
-}
-
-/* landing */
-
-.landing {
-    color: var(--txt-prime);
-    display: flex;
-    align-items: center;
-}
-
-.landing .text-content h1 {
-    font-size: clamp(22px, 3vw, 2.2em);
-}
-
-.landing .text-content > * {
-    padding: 10px;
-}
-
-/* projects */
-
-.projects > * {
-    padding: 10px;
-}
-
-/* about */
-
-.about {
-    display: flex;
-    flex-direction: column;
-}
-
-.about h1 {
-    padding: 10px;
-}
-
-.about .about-content {
-    display: flex;
-    flex-direction: column;
-}
-
-.about .content p {
-    line-height: 28px;   /* within paragraph */
-    padding: 10px;
-}
-
-/* .about .about-content .content {} */
-/* .about .about-content .img-container {} */
-
-.about .about-content img {
-    margin: 10px;
-    width: 90%;
-    aspect-ratio: 1;
-    object-fit: cover;
-    object-position: 0 0;
-    border-radius: 8px;
-    border-top: 1px solid var(--txt-highlight);
-
-    -webkit-mask-image: linear-gradient(
-        rgb(0 0 0 / 1),
-        rgb(0 0 0 / 0.6) 60%,
-        rgb(0 0 0 /0)
-    );
-
-    mask-image: linear-gradient(
-        rgb(0 0 0 / 1),
-        rgb(0 0 0 / 0.6) 60%,
-        rgb(0 0 0 /0)
-    );
-}
-
-/* about me - skill set */
-
-.about .content .skill-set {
-    display: flex;
-    padding: 0 20px 60px;
-    gap: 20%;
-}
-
-.about .content ul {
-    list-style: none;
-}
-
-.about .content ul li {
-    padding: 10px 0;
-}
-
-/* contact */
-
-.contact .section-label {
-    color: var(--txt-highlight);
-}
-
-.contact .eng-title {
-    color: var(--txt-prime);
-}
-
-.contact p {
-    color:rgba(255, 255, 255, 0.693)
-}
-
-.contact :is(.section-label, .eng-title, p, form) {
-    padding: 10px;
-}
-
-.contact form {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.contact form input {
-    height: 30px;
-}
-
-.contact form textarea {
-    height: 120px;
-}
-
-.contact form :is(input, textarea) {
-    padding: 4px;
-    outline: none;
-    border: none;   
-    background-color: rgba(255, 255, 255, 0.092);
-    border-radius: 2px;
-    color: var(--txt-prime);
-}
-
-/* Removing input background color for Chrome autocomplete */
-/* Since if I'm selecting one of recommendations from autocomplete 
-    the input drammatically change its styles and make it hard to 
-    figure out problem and fix */
-input:-webkit-autofill,
-input:-webkit-autofill:hover, 
-input:-webkit-autofill:focus, 
-input:-webkit-autofill:active {
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: var(--txt-prime);
-    transition: background-color 5000s ease-in-out 0s;
-    box-shadow: inset 0 0 20px 20px rgba(255, 255, 255, 0.092);
-}
-
-.contact form button {
-    outline: none;
-    border: 1px solid var(--txt-highlight);
-    color: var(--txt-highlight);
-    border-radius: 2px;
-    background-color: transparent;
-    cursor: pointer;
-    padding: 4px 0;
-    font-size: 14px;
-}
-
-.contact form button:hover {
-    background-color: #0ae4d523;
-}
-
-/* footer */
-
-footer {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    /* justify-content: center; */
-    align-items: center;
-    position: relative;
-
-    padding: 20px;
-}
-
-footer :is(.accounts, .git-repo) {
-    margin-bottom: 10px;
-}
-
-footer .accounts ul {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-footer .accounts ul li {
-    list-style: none;
-}
-
-footer .accounts ul li a {
-    padding: 10px;
-}
-
-footer .accounts ul li a svg {
-    fill: var(--txt-prime);
-    width: 25px;
-    height: 25px;
-    transition: all 0.2s ease-in;
-}
-
-footer .accounts ul li a svg:hover {
-    fill: var(--txt-highlight);
-    transform: translateY(-6px);
-}
-
-footer .git-repo a {
-    color: var(--txt-prime);
-    padding: 8px;
-    font-size: 3.2vw;
-}
-
-footer .git-repo a:hover {
-    color: var(--txt-highlight);
-}
-
-
-@media only screen and (min-width: 600px) {
-    footer .git-repo a {
-        font-size: 14px;
-    }
+    z-index: -2;
 }
 
 .loading-background {
@@ -392,7 +122,7 @@ footer .git-repo a:hover {
 
 /* Styles for the scroll bar track */
 ::-webkit-scrollbar {
-    width: 8px; /* Adjust the width as desired */
+    width: var(--scroll-bar-width);
 }
 
 /* Styles for the scroll bar thumb */
@@ -409,63 +139,4 @@ footer .git-repo a:hover {
 /* Styles for the scroll bar track when scrolling */
 ::-webkit-scrollbar-track {
     background-color: #031825; /* Replace with your desired track color */
-}
-
-/* ------------------------------------------------------------ MODAL --------------------------------------------------------------- */
-
-.message-sent-dialog::backdrop {
-    background-color: #031825;
-}
-
-.message-sent-dialog {
-    width: 90%;
-    height: 90%;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    border: none;
-    border-radius: 6px;
-    background-color: rgba(255, 255, 255, 0.092);
-    z-index: 2;
-
-    padding: 20px;
-    overflow: hidden;
-}
-
-.message-sent-dialog > * {
-    width: 100%;
-    text-align: center;
-}
-
-.message-sent-dialog svg {
-    height: 320px;
-}
-
-.message-sent-dialog form button {
-    width: 100px;
-    padding: 10px;
-    margin: 0 auto;
-}
-
-.message-sent-dialog .error-message {
-    padding-top: 0;
-}
-
-.message-sent-dialog p {
-    line-height: 20px;
-    padding-top: 0;
-}
-
-.message-sent-dialog .or {
-    font-size: 12px;
-    padding: 0;
-}
-
-.message-sent-dialog .alt {
-    padding-top: 4px;
-}
-
-.message-sent-dialog a {
-    color: var(--txt-highlight);
-    font-weight: bolder;
 }

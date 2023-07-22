@@ -1,0 +1,431 @@
+/* 
+    z index
+        -2 canvas
+        -1 card images
+        0 all
+        1 header
+        2 dialog
+        3 loading
+*/
+
+header {
+    width: var(--header-width); /* - 100px */
+    height: var(--header-height); /* 100% as sidebar and occupy the entire screen height */
+    position: fixed; /* to make it in the same place what ever the user did */
+    top: 0; /* to position it from top of the screen */
+    right: 0; /* to position it in right side as sidebar*/
+    overflow: hidden;
+    z-index: 1;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+header nav {
+    width: 100%;
+    padding: 10px;
+}
+
+header nav ul li {
+    padding: 5px 0;
+    display: flex;
+    justify-content: flex-end;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+/* header nav ul li .link {} */
+header nav ul li .link:hover {
+    color: var(--txt-highlight);
+}
+
+header nav ul li > * {
+    font-weight: bold;
+    color: var(--txt-prime);
+    padding: 10px;
+}
+
+header nav ul li .resume {
+    color: var(--txt-highlight);
+    border: 1px solid var(--txt-highlight);
+    border-radius: 4px;
+    padding: 10px;
+    /* margin-right: 10px; */
+}
+
+header nav ul li .move-nav {
+    color: var(--txt-prime);
+    border: none;
+    outline: none;
+    background-color: transparent;
+}
+
+
+header nav ul .logo svg {
+    width: var(--logo-size);
+    height: var(--logo-size);
+}
+
+.line {
+    width: 1px;
+    height: 210px;
+    background-color: #fcfcfc9e;
+    margin-left: calc(100% - 20px);
+}
+
+.desk-side-bar {
+    display: none;
+}
+
+
+main {
+    width: calc(100% - var(--header-width));
+}
+
+.container {
+    min-height: 100vh;
+    color: white;
+    padding: 10px 0 0 10px;
+}
+
+
+/* section titles */
+
+.title-container {
+    display: flex;
+}
+
+.title-container h1 {
+    font-size: clamp(22px, 3vw, 2.2em);
+    color: var(--txt-prime);
+}
+
+.title-container .line {
+    height: 1px;
+    flex-grow: 1;
+    background-color: var(--line-color);
+    margin: auto 0 auto 8px;
+}
+
+
+/* landing */
+
+.landing {
+    color: var(--txt-prime);
+    display: flex;
+    align-items: center;
+}
+
+.landing .text-content h1 {
+    font-size: clamp(22px, 3vw, 2.2em);
+}
+
+.landing .text-content > * {
+    padding: 10px;
+}
+
+
+/* projects */
+
+.projects > * {
+    padding: 10px;
+}
+
+.projects .projects-list {
+    padding-top: 30px;
+    padding-bottom: 10vw;
+
+    --border-radius: 8px;
+}
+
+.projects .projects-list > ul {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 8vw;
+}
+
+.projects .projects-list ul .card-project {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    display: flex;
+    overflow: hidden;
+    border-radius: var(--border-radius);
+}
+
+.projects .projects-list ul .card-project img {
+    width: 100%;
+    object-fit: cover;
+    position: absolute;
+    z-index: -1;
+    opacity: 0.08;
+
+    border-radius: var(--border-radius);
+}
+
+.projects .projects-list ul li .card {
+    width: 100%;
+    background-color: #1d455f41;
+    padding: 16px 10px;
+    border-radius: var(--border-radius);
+    /* position: absolute;   */
+    
+    -webkit-box-shadow: 2px 2px 0px -1px rgba(10,228,213,0.41);
+    -moz-box-shadow: 2px 2px 0px -1px rgba(10,228,213,0.41);
+    box-shadow: 2px 2px 0px -1px rgba(10,228,213,0.41);
+}
+
+.projects .projects-list ul li .card > * {
+    padding: 10px;
+}
+
+.projects .projects-list ul li .card h1 {
+    font-size: clamp(24px, 5vw, 28px);
+}
+
+.projects .projects-list ul li .card .description {
+    line-height: 28px;   /* within paragraph */
+}
+
+.projects .card .project-technologies p {
+    font-size: 16px;
+}
+
+
+/* about */
+
+.about {
+    display: flex;
+    flex-direction: column;
+}
+
+.about h1 {
+    padding: 10px;
+}
+
+.about .about-content {
+    display: flex;
+    flex-direction: column;
+    padding-top: 30px;
+    padding-bottom: 10vw;
+}
+
+.about .content p {
+    line-height: 28px;   /* within paragraph */
+    padding: 10px;
+}
+
+/* .about .about-content .content {} */
+/* .about .about-content .img-container {} */
+
+.about .about-content img {
+    margin: 0 10px 10px;
+    width: 90%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    object-position: 0 0;
+    border-radius: 8px;
+    border-top: 1px solid var(--txt-highlight);
+
+    -webkit-mask-image: linear-gradient(
+        rgb(0 0 0 / 1),
+        rgb(0 0 0 / 0.6) 60%,
+        rgb(0 0 0 /0)
+    );
+
+    mask-image: linear-gradient(
+        rgb(0 0 0 / 1),
+        rgb(0 0 0 / 0.6) 60%,
+        rgb(0 0 0 /0)
+    );
+}
+
+
+/* about me - skill set */
+
+.about .content .skill-set {
+    display: flex;
+    padding: 0 20px;
+    gap: 20%;
+}
+
+.about .content ul li {
+    padding: 10px 0;
+    display: flex;
+    gap: 6px;
+}
+
+
+/* contact */
+
+.contact .eng-title {
+    color: var(--txt-prime);
+}
+
+.contact p {
+    color:rgba(255, 255, 255, 0.693)
+}
+
+.contact :is(.eng-title, p, form) {
+    padding: 10px;
+}
+
+.contact form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.contact form input {
+    height: 30px;
+}
+
+.contact form textarea {
+    height: 120px;
+}
+
+.contact form :is(input, textarea) {
+    padding: 4px;
+    outline: none;
+    border: none;   
+    background-color: rgba(255, 255, 255, 0.092);
+    border-radius: 2px;
+    color: var(--txt-prime);
+}
+
+/* Removing input background color for Chrome autocomplete */
+/* Since if I'm selecting one of recommendations from autocomplete 
+    the input drammatically change its styles and make it hard to 
+    figure out problem and fix */
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active {
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: var(--txt-prime);
+    transition: background-color 5000s ease-in-out 0s;
+    box-shadow: inset 0 0 20px 20px rgba(255, 255, 255, 0.092);
+}
+
+.contact form button {
+    outline: none;
+    border: 1px solid var(--txt-highlight);
+    color: var(--txt-highlight);
+    border-radius: 2px;
+    background-color: transparent;
+    cursor: pointer;
+    padding: 4px 0;
+    font-size: 14px;
+}
+
+.contact form button:hover {
+    background-color: #0ae4d523;
+}
+
+/* footer */
+
+footer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
+    position: relative;
+
+    padding: 20px;
+}
+
+footer :is(.accounts, .git-repo) {
+    margin-bottom: 10px;
+}
+
+footer .accounts ul {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+footer .accounts ul li a {
+    padding: 10px;
+}
+
+footer .accounts ul li a svg {
+    transition: transform 0.2s ease-in;
+}
+
+footer .accounts ul li a svg:hover {
+    fill: var(--txt-highlight);
+    transform: translateY(-6px);
+}
+
+footer .git-repo a {
+    color: var(--txt-prime);
+    padding: 8px;
+    /* font-size: ; */
+    font-size: 3.2vw
+}
+
+footer .git-repo a:hover {
+    color: var(--txt-highlight);
+}
+
+/* ------------------------------------------------------------ MODAL --------------------------------------------------------------- */
+
+.message-sent-dialog::backdrop {
+    background-color: #031825;
+}
+
+.message-sent-dialog {
+    width: 90%;
+    height: 90%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: none;
+    border-radius: 6px;
+    background-color: rgba(255, 255, 255, 0.092);
+    z-index: 2;
+
+    padding: 20px;
+    overflow: hidden;
+}
+
+.message-sent-dialog > * {
+    width: 100%;
+    text-align: center;
+}
+
+.message-sent-dialog svg {
+    height: 320px;
+}
+
+.message-sent-dialog form button {
+    width: 100px;
+    padding: 10px;
+    margin: 0 auto;
+}
+
+.message-sent-dialog .error-message {
+    padding-top: 0;
+}
+
+.message-sent-dialog p {
+    line-height: 20px;
+    padding-top: 0;
+}
+
+.message-sent-dialog .or {
+    font-size: 12px;
+    padding: 0;
+}
+
+.message-sent-dialog .alt {
+    padding-top: 4px;
+}
+
+.message-sent-dialog a {
+    color: var(--txt-highlight);
+    font-weight: bolder;
+}

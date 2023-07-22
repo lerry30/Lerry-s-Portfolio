@@ -6,7 +6,7 @@ const navBar = document.querySelector('header'); // header however because it is
 const content = document.querySelector('main'); // main or the entire page content
 
 const counterSides = { left: 'right', right: 'left' };
-const sidebarWidth = findNumbers(cssVarFromElement(document.body, '--mobile-sb-width')); // get css value. it's originally 100px
+const sidebarWidth = findNumbers(cssVarFromElement(document.body, '--header-width')); // get css value. it's originally 100px
 
 export const toggleSidePos = () => {
     moveNavBar.addEventListener('click', (ev) => {

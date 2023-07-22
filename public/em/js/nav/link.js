@@ -1,4 +1,5 @@
 import { cssVarFromElement } from '../utils/css.js';
+import { findNumbers } from '../utils/number.js';
 
 const links = document.querySelectorAll('header nav ul li .link'); // navigational buttons
 const sections = {}; // container to hold all properties that are needed for further functionalities
@@ -34,7 +35,8 @@ export const scrollPage = () => {
 
         // click event
         link.addEventListener('click', () => {
-            const top = sections[nameOfSection].yPos;
+            const paddingTop = pushPageALittleToMakeItVisibleFromNavBar();
+            const top = sections[nameOfSection].yPos - paddingTop; // subtract so scroll it a bit to top
             scrollTo(0, top);
 
             setHighLightColor(link);
@@ -48,6 +50,7 @@ export const highLightNavLink = () => { // hightlight the text or nav link if it
         const sectionProps = sections[nameOfSection];
         const top = Math.abs(sectionProps?.element?.getBoundingClientRect()?.top);
 
+        
         if(top < sectionProps.half) {
             setHighLightColor(link);
             break;
@@ -68,4 +71,12 @@ function setHighLightColor(link) { // hightlight the text selected or nav link s
     // set selected nav link color to hightlight
     link.style.color = hightLightText;
     // link.style.borderRight = `1px solid ${hightLightText}`;
+}
+
+function pushPageALittleToMakeItVisibleFromNavBar() { // since by default(on mobile) pages will scroll only on the top of screen so I'll need to push it a little to it will be visible from nav bar 
+    // get header height to know the appropriate position of page when it scrolls using navigation links
+    const headerHeight = cssVarFromElement(document.body, '--header-height');
+    const withoutUnit = headerHeight.endsWith('px') ? findNumbers(headerHeight) : 0;
+
+    return withoutUnit;
 }
