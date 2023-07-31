@@ -28,4 +28,6 @@ connectDB().then(() => {
     app.listen(PORT, () => {
         console.log(`Listening on port ${PORT}`);
     });
+}).catch((error) => {
+    console.log('Cant\t connect to Mongo Database!');
 });
