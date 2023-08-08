@@ -57,6 +57,9 @@ async function send(url, data) {
             body: JSON.stringify(data)
         });
 
+        if (!response.ok) // or check for response.status or response.statusText
+            throw new Error('Please try again later');
+
         return response.json();
     } catch (error) {
         modalFailed.showModal();
