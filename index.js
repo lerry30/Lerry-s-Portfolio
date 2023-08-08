@@ -29,5 +29,5 @@ connectDB().then(() => {
         console.log(`Listening on port ${PORT}`);
     });
 }).catch((error) => {
-    console.log('Cant\t connect to Mongo Database!');
+    console.log('Cann\'t connect to Mongo Database!');
 });

@@ -17,8 +17,8 @@ export const sendMessage = () => {
 }
 
 function contactForm() {
-    const url = 'https://lerrysamson.cyclic.app/newmessage';
-    // const url = '/newmessage';
+    // const url = 'https://lerrysamson.cyclic.app/newmessage';
+    const url = '/newmessage';
 
     const sendMessageWithInfo = async (ev) => {
         ev.preventDefault();
