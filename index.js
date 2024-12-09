@@ -20,6 +20,7 @@ const connectDB = async () => {
 app.use(express.json());
 // app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public/em/')));
+app.use(express.static(path.join(__dirname, 'public/em/blogs/node-server-min-setup.html')));
 
 const useRoute = require('./routes/messageRoutes');
 app.use(useRoute);

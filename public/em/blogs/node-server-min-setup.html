@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>John Lerry R. Samson</title>
+    <link rel="icon" type="image/x-icon" href="../img/favicon.ico">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/mobile.css">
+    <link rel="stylesheet" href="css/desktop.css">
+    <script type="module" src="js/main.js" defer></script>
+</head>
+<body>
+    <template id="template-copy-button">
+        <button class="copy-button">
+            <svg 
+                xmlns="http://www.w3.org/2000/svg" 
+                width="20" 
+                height="20" 
+                viewBox="0 0 24 24" 
+                fill="none" 
+                stroke="currentColor" 
+                stroke-width="2" 
+                stroke-linecap="round" 
+                stroke-linejoin="round" 
+                class="copy"
+            >
+                <rect width="14" height="14" x="8" y="8" rx="2" ry="2"/>
+                <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/>
+            </svg>
+            <svg 
+                xmlns="http://www.w3.org/2000/svg" 
+                width="20" 
+                height="20" 
+                viewBox="0 0 24 24" 
+                fill="none" 
+                stroke="currentColor" 
+                stroke-width="2" 
+                stroke-linecap="round" 
+                stroke-linejoin="round" 
+                class="copied"
+            >
+                <path d="M18 6 7 17l-5-5"/>
+                <path d="m22 10-7.5 7.5L13 16"/>
+            </svg>
+        </button>
+    </template>
+    <main class="content">
+        <header>
+            <h1>Deploying a Secure Node.js Server with Docker, Nginx, MySQL, and Free SSL</h1>
+            <img src="../img/server-diagram.png" alt="Server's Diagram" class="s-img" />
+            <small>Setup Overview Diagram</small>
+        </header>
+        <section class="articles">
+            <article>
+                <p>
+                    Learn to set up a Node.js server using cutting-edge tools like Docker, 
+                    Nginx, and Let's Encrypt. Unlike traditional app deployment methods, 
+                    this guide walks you through the step-by-step process of deploying from 
+                    scratch. It offers a deeper understanding of how things work and gives 
+                    you full control over your setup. While it may lack some advanced production-grade 
+                    security features, this approach strikes a balance for small apps without 
+                    over-complicating security.
+                </p>
+                <p>
+                    This setup works with cloud services such as VPS, AWS EC2, and even on physical 
+                    machines. I'll be using Ubuntu Server because it is easy to configure and has a 
+                    large, active community, making it easier to find solutions if any issues arise.
+                </p>
+            </article>
+            <article>
+                <h2>Add New Server User</h2>
+                <p>
+                    Adding a new user to your server enhances security, as the default root user 
+                    should be restricted or even disabled.
+                </p>
+                <code class="dark-box">
+                    <span class="text">adduser your_user_name</span>
+                </code>
+            </article>
+            <article>
+                <h2>Assign User Permissions</h2>
+                <p>
+                    Grant administrative privileges to the user you just created.
+                </p>
+                <code class="dark-box">
+                    <span class="text">usermod -aG sudo your_user_name</span>
+                </code>
+            </article>
+            <article>
+                <h2>Switch User Account</h2>
+                <p>
+                    Switch to the newly created user account.
+                </p>
+                <code class="dark-box">
+                    <span class="text">su - your_user_name</span>
+                </code>
+            </article>
+            <article>
+                <h2>Set Up a Domain Name</h2>
+                <p>
+                    Start by exploring different cloud services to compare their domain name pricing and features.
+                </p>
+                <p>
+                    After purchasing a domain name, access its management settings to point it to your server's IP address.
+                </p>
+                <p>
+                    To find your server's IP address, use the following command:
+                </p>
+                <code class="dark-box">
+                    <span class="text">ip addr</span>
+                </code>
+                <p>
+                    In the DNS records section, add a new 'A' record and configure a subdomain for 'CNAME' entries. 
+                    Provide the IP address and set the TTL (Time to Live) to a lower value, such as 300. This allows 
+                    faster propagation, which you can adjust to a higher value later.
+                </p>
+                <p>
+                    Check if your domain name has propagated worldwide using tools like 
+                    <a href="https://www.whatsmydns.net" target="_blank" rel="noopener noreferrer">DNS Propagation</a>.
+                </p>
+            </article>
+        </section>
+    </main>
+</body>
+</html>

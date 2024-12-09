@@ -14,6 +14,12 @@
     --line-color: #32678887;
 }
 
+/*
+@font-face {
+    font-family: 'source';
+    src: url('http://localhost:3000/SourceSerif4.ttf') format('truetype');
+}*/
+
 * {
     margin: 0;
     padding: 0;

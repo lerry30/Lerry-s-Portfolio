@@ -126,27 +126,23 @@ main {
 }
 
 
-/* projects */
+/* card */
 
-.projects > * {
-    padding: 10px;
-}
-
-.projects .projects-list {
+.card-list {
     padding-top: 30px;
     padding-bottom: 10vw;
 
     --border-radius: 8px;
 }
 
-.projects .projects-list > ul {
+.card-list > ul {
     width: 100%;
     display: flex;
     flex-direction: column;
     gap: 8vw;
 }
 
-.projects .projects-list ul .card-project {
+.card-list ul .card-container {
     width: 100%;
     height: 100%;
     position: relative;
@@ -155,17 +151,7 @@ main {
     border-radius: var(--border-radius);
 }
 
-.projects .projects-list ul .card-project img {
-    width: 100%;
-    object-fit: cover;
-    position: absolute;
-    z-index: -1;
-    opacity: 0.08;
-
-    border-radius: var(--border-radius);
-}
-
-.projects .projects-list ul li .card {
+.card-list ul li .card {
     width: 100%;
     background-color: #1d455f41;
     padding: 16px 10px;
@@ -177,19 +163,70 @@ main {
     box-shadow: 2px 2px 0px -1px rgba(10,228,213,0.41);
 }
 
-.projects .projects-list ul li .card > * {
+.card-list ul li .card > * {
     padding: 10px;
 }
 
-.projects .projects-list ul li .card h1 {
+.card-list ul li .card h1 {
     font-size: clamp(24px, 5vw, 28px);
 }
 
-.projects .projects-list ul li .card .description {
+.card-list ul li .card .description {
     line-height: 28px;   /* within paragraph */
 }
 
+
+/* projects */
+
+.projects > * {
+    padding: 10px;
+}
+
+.projects .card-list {
+    padding-bottom: 80px;
+}
+
+.projects .card-list ul .card-container img {
+    width: 100%;
+    object-fit: cover;
+    position: absolute;
+    z-index: -1;
+    opacity: 0.08;
+
+    border-radius: var(--border-radius);
+}
+
 .projects .card .project-technologies p {
+    font-size: 16px;
+}
+
+
+/* blog */
+
+.blog > * {
+    padding: 10px;
+}
+
+.blog .card-list {
+    padding-bottom: 80px;
+}
+
+.blog .card h1 {
+    font-size: clamp(14px, 3vw, 24px);
+}
+
+.blog .card .blog-links a {
+    color: var(--txt-highlight);
+}
+
+.blog .card .blog-links a article {
+    display: flex;
+    items-center: flex-end;
+    gap: 4px;
+    padding: 8px 0;
+}
+
+.blog .card .blog-links a span {
     font-size: 16px;
 }
 

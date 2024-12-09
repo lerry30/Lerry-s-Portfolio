@@ -120,42 +120,28 @@
     }
 
 
-    /* projects */
-
-    .projects .projects-list > ul {
+    /* card */
+    
+    .card-list > ul {
         gap: 0;
     }
 
-    .projects .projects-list ul li:nth-child(odd) img {
+    .card-list ul li:nth-child(even) .card {
         right: 0;
     }
 
-    .projects .projects-list ul li:nth-child(even) .card {
-        right: 0;
-    }
-
-    .projects .projects-list ul li:nth-child(even) .card > * {
+    .card-list ul li:nth-child(even) .card > * {
         text-align: end;
     }
     
-    .projects .projects-list ul .card-project {
-        height: 80vh;
+    .card-list ul .card-container {
+        height: 80vh; /* 80vh default for project section's items height */
         overflow: visible;
         justify-content: space-between;
         align-items: center;
     }
     
-    .projects .projects-list ul .card-project img {
-        width: 40vw;
-        opacity: 1;
-    }
-
-    .projects .projects-list ul .card-project img::before {
-        content: "";
-        background-color: #1d455f41;
-    }
-    
-    .projects .projects-list ul li .card {
+    .card-list ul li .card {
         width: 40vw;
         padding: 16px 0;
         background-color: transparent;
@@ -166,16 +152,39 @@
         box-shadow: none;
     }
     
-    .projects .projects-list ul li .card > * {
+    .card-list ul li .card > * {
         padding: 10px 0;
     }
     
-    .projects .projects-list ul li .card .description {
+    .card-list ul li .card .description {
         background-color: #0e2737;
         border-radius: var(--border-radius);
         padding: 20px;
     }
 
+
+    /* projects */
+
+    .projects .card-list ul li:nth-child(odd) img {
+        right: 0;
+    }
+    
+    .projects .card-list ul .card-container img {
+        width: 40vw;
+        opacity: 1;
+    }
+
+    .projects .card-list ul .card-container img::before {
+        content: "";
+        background-color: #1d455f41;
+    }
+    
+
+    /* blog */
+
+    .blog .card-list ul .card-container {
+        height: 60vh;
+    }
 
     /* about */
 

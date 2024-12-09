@@ -4,7 +4,7 @@
   "description": "Lerry's Portfolio",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+      "start": "node index.js"
   },
   "keywords": [],
   "author": "John Lerry R. Samson",
