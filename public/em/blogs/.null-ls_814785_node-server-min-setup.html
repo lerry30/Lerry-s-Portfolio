@@ -121,53 +121,6 @@
                     <a href="https://www.whatsmydns.net" target="_blank" rel="noopener noreferrer">DNS Propagation</a>.
                 </p>
             </article>
-            <article>
-                <h2>Remove Password Authentication on SSH</h2>
-                <p>
-                    This allows specific device to SSH without verifying your credential. So it makes SSH easier to
-                    connect remotely.
-                </p>
-                <code class="dark-box">
-                    <span class="text">ssh-copy-id your_user_name@111.222.33.4444</span>
-                </code>
-            </article>
-            <article>
-                <h2>Hardening SSH</h2>
-                <p>
-                    Edit these configuration files to ensure default settings are not obviously easy to gained access
-                    by attackers.
-                </p>
-                <code class="dark-box">
-                    <span class="text">sudo vim /etc/ssh/sshd_config</span>
-                </code>
-                <p>Find each fields and set the proper values.</p>
-                <code class="dark-box">
-                    <span class="text">PasswordAuthentication no</span>
-                </code>
-                <code class="dark-box">
-                    <span class="text">PermitRootLogin no</span>
-                </code>
-                <code class="dark-box">
-                    <span class="text">UsePAM no</span>
-                </code>
-                <p>Modify this config file if exists.</p>
-                <code class="dark-box">
-                    <span class="text">sudo vim /etc/ssh/sshd_config.d/50-cloud-init.conf</span>
-                </code>
-                <p>Set this field to no or just remove it.</p>
-                <code class="dark-box">
-                    <span class="text">PasswordAuthentication no</span>
-                </code>
-                <p>Restart the SSH daemon service to apply changes.</p>
-                <code class="dark-box">
-                    <span class="text">sudo systemctl reload ssh</span>
-                </code>
-                <p>Verify if user root able access remotely.</p>
-                <code class="dark-box">
-                    <span class="text">ssh root@111.222.33.444</span>
-                </code>
-                <p>If the output is "Permission denied(publickey)", congrats since the openssh is now hardened.</p>
-            </article>
         </section>
     </main>
 </body>
