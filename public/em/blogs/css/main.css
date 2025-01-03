@@ -152,6 +152,7 @@ hr {
     border-radius: 6px;
     color: white;
     display: flex;
+    flex-direction: column;
     position: relative;
 }
 
@@ -165,3 +166,11 @@ hr {
 .dark-box .copy-button .copied {
     display: none;
 }
+
+.dark-box .text {
+    display: block;
+}
+
+.dark-box .tab { padding-left: 30px; }
+.dark-box .tab2 { padding-left: 60px; }
+.dark-box .tab3 { padding-left: 90px; }

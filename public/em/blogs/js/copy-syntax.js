@@ -18,7 +18,7 @@ export const copySyntax = () => {
         const svgCopied = newCopyButton.querySelector('.copied');
 
         newCopyButton.addEventListener('click', () => {
-            navigator.clipboard.writeText(text);
+            navigator.clipboard.writeText(String(text).trim());
             svgCopy.style.display = 'none';
             svgCopied.style.display = 'flex';
             setTimeout(() => {
