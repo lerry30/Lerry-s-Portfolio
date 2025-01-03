@@ -5,7 +5,12 @@ export const copySyntax = () => {
     const darkBoxes = document.querySelectorAll('.dark-box');
     for(const darkBox of darkBoxes) {
         const newCopyButton = copyButton.cloneNode(true);
-        const text = String(darkBox.querySelector('.text').textContent).trim();
+        const allTextElem = darkBox.querySelectorAll('.text');
+        let text = '';
+        for(const key in allTextElem) {
+            if(!allTextElem.hasOwnProperty(key)) continue;
+            text = `${text}\n${String(allTextElem[key].textContent).trim()}`;
+        }
 
         darkBox.append(newCopyButton);
 

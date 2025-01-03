@@ -168,50 +168,6 @@
                 </code>
                 <p>If the output is "Permission denied(publickey)", congrats since the openssh is now hardened.</p>
             </article>
-            <article>
-                <h2>Utilized Domain Name Instead of IP Address</h2>
-                <p>Double check for domain name using nslookup</p>
-                <code class="dark-box">
-                    <span class="text">nslookup your_domain_name.com</span>
-                </code>
-                <p>Then, now use it for ssh since IP address is forgettable</p>
-                <code class="dark-box">
-                    <span class="text">ssh your_user_name@your_domain_name.com</span>
-                </code>
-            </article>
-        </section>
-        <hr/>
-        <section class="articles">
-            <header>
-                <h1>Setting Nginx as Reverse Proxy</h1>
-                <img src="../img/server-diagram.png" alt="Server's Diagram" class="s-img" />
-                <small>Setup Overview Diagram</small>
-            </header>
-            <article>
-                <p>
-                    In this case I will used nginx as my reverse proxy server. It doesn't automatically generates
-                    ssl certificate for https. Typically nginx used Let's Encrypt to issue a free ssl certificate.
-                </p>
-            </article>
-            <article>
-                <h2>Steps to generate ssl with Let's Encrypt</h2>
-                <p>Install necessary dependencies.</p>
-                <code class="dark-box">
-                    <span class="text">sudo apt update</span>
-                </code>
-                <code class="dark-box">
-                    <span class="text">sudo apt install certbot python3-certbot-nginx</span>
-                </code>
-                <p>Obtain ssl certificate.</p>
-                <code class="dark-box">
-                    <span class="text">sudo certbot --nginx -d your_domain_name.com</span>
-                </code>
-                <p>Nginx ssl configuration.</p>
-                <code class="dark-box">
-                    <span class="text">sudo vim /etc/nginx/nginx.conf 1</span>
-                    <span class="text">sudo vim /etc/nginx/nginx.conf 2</span>
-                </code>
-            </article>
         </section>
     </main>
 </body>
