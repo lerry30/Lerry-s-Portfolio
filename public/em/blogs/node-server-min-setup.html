@@ -226,9 +226,9 @@
                     <span class="text tab">default_type application/octet-stream;</span>
                     <br/>
                     <span class="text tab">upstream backendserver {</span>
-                    <span class="text tab2">server 127.0.0.1:1111;</span>
-                    <span class="text tab2">server 127.0.0.1:2222;</span>
-                    <span class="text tab2">server 127.0.0.1:3333;</span>
+                    <span class="text tab2">server 127.0.0.1:4001;</span>
+                    <span class="text tab2">server 127.0.0.1:4002;</span>
+                    <span class="text tab2">server 127.0.0.1:4003;</span>
                     <span class="text tab">}</span>
                     <br/>
                     <span class="text tab">server {</span>
@@ -349,6 +349,163 @@
                     <span class="text">CREATE DATABASE database_name;</span>
                     <span class="text">GRANT ALL PRIVILEGES ON database_name.* TO 'user_name'@'%';</span>
                     <span class="text">FLUSH PRIVILEGES;</span>
+                </code>
+                <p>
+                    Configuring mysql to set bind address to allow access especially for docker containers to
+                    connect to it.
+                </p>
+                <code class="dark-box">
+                    <span class="text">sudo vim /etc/mysql/mariadb.conf.d/50-server</span>
+                </code>
+                <p>Look for bind-address directive</p>
+                <code class="dark-box">
+                    <span class="text">bind-address = 0.0.0.0</span>
+                </code>
+                <p>
+                    Altering the value of bind-address to 0.0.0.0 makes it accesible to any request from any 
+                    IP address.
+                </p>
+            </article>
+            <article>
+                <h2>Assigning Timezone to Mysql and Ubuntu Server</h2>
+                <p>Check for current timezone</p>
+                <code class="dark-box">
+                    <span class="text">timedatectl</span>
+                </code>
+                <p>List available timezones</p>
+                <code class="dark-box">
+                    <span class="text">timedatectl list-timezones</span>
+                </code>
+                <p>Set server's timezone</p>
+                <code class="dark-box">
+                    <span class="text">sudo timedatectl set-timezone Asia/Manila</span>
+                </code>
+                <p>Verify changes</p>
+                <code class="dark-box">
+                    <span class="text">timedatectl</span>
+                </code>
+                <p>Sync time with NTP(optional), ensuring the server's clock sync with NTP server.</p>
+                <code class="dark-box">
+                    <span class="text">sudo timedatectl set-ntp true</span>
+                </code>
+                <p>In mysql configuration replace or add timezone in /etc/mysql/mariadb.conf.d/50-server.conf</p>
+                <code class="dark-box">
+                    <span class="text">[mysqlId]</span>
+                    <span class="text">default-time-zone = '+08:00'</span>
+                </code>
+                <p>Save the config file and restart mysql or mariadb</p>
+                <code class="dark-box">
+                    <span class="text">sudo systemctl restart mariadb</span>
+                </code>
+                <p>Verify mysql timezone</p>
+                <code class="dark-box">
+                    <span class="text">sudo mysql -u user_name -p</span>
+                    <span class="text">USE database_name;</span>
+                    <span class="text">SELECT @@global.time_zone;</span>
+                </code>
+            </article>
+            <article>
+                <h2>Database Creation & Codebase Inclusion</h2>
+                <p>
+                    Start creating database, upload the web server code(including frontend server like React JS),
+                    and other requirements like configuring the .env file.
+                </p>
+                <p>Displaying available IP addresses of the server.</p>
+                <code class="dark-box">
+                    <span class="text">hostname -I</span>
+                </code>
+                <p>Take note the IP address of mysql server which start with '172.0.0.0'.</p>
+                <p>Configuring .env file with database credentials</p>
+                <code class="dark-box">
+                    <span class="text">PORT='4000'</span>
+                    <span class="text">DB_HOST='172.0.0.0'</span>
+                    <span class="text">DB_USER='user_name'</span>
+                    <span class="text">DB_PASSWORD='password'</span>
+                    <span class="text">DB_NAME='database_name'</span>
+                </code>
+            </article>
+        </section>
+        <hr/>
+        <section class="articles">
+            <header>
+                <h1>Setting Up Mysql Server</h1>
+                <img src="../img/server-diagram.png" alt="Server's Diagram" class="s-img" />
+                <small>Setup Overview Diagram</small>
+            </header>
+            <article>
+                <p>
+                    Install docker in ubuntu server
+                    <a href="https://docs.docker.com/engine/install/ubuntu" target="_blank" rel="noopener noreferrer">
+                        Docker installation guide
+                    </a>
+                </p>
+            </article>
+            <article>
+                <h2>Docker file & Docker compose file</h2>
+                <p>
+                    Docker file required to named as 'Dockerfile' to set the nodejs backend. Make sure that Dockerfile
+                    is place in the root directory of codebase.
+                </p>
+                <code class="dark-box">
+                    <span class="text"># Dockerfile</span>
+                    <span class="text">FROM node:22
+                    <span class="text">WORKDIR /app</span>
+                    <span class="text">COPY package*.json ./</span>
+                    <span class="text">RUN npm install</span>
+                    <span class="text">COPY . .</span>
+                    <span class="text">EXPOSE 4000</span>
+                    <span class="text">CMD ["node", "backend/server.js"]</span>
+                </code>
+                <p>Make sure that tabs for every indentations are only 2 spaces since yml file is really sensitive.</p>
+                <code class="dark-box">
+                    <span class="text">services:</span>
+                    <span class="text">backend01:</span>
+                    <span class="text">image: backend</span>
+                    <span class="text">ports:</span>
+                    <span class="text">- 4001:4000</span>
+                    <span class="text">env_file:</span>
+                    <span class="text">- .env</span>
+                    <span class="text">command: ["npm", "run", "start"]</span>
+                    <span class="text">volumes:</span>
+                    <span class="text">- ~/uploads:/app/backend/uploads</span>
+                    <span class="text">backend02:</span>
+                    <span class="text">image: backend</span>
+                    <span class="text">ports:</span>
+                    <span class="text">- 4002:4000</span>
+                    <span class="text">env_file:</span>
+                    <span class="text">- .env</span>
+                    <span class="text">command: ["npm", "run", "start"]</span>
+                    <span class="text">volumes:</span>
+                    <span class="text">- ~/uploads:/app/backend/uploads</span>
+                    <span class="text">backend03:</span>
+                    <span class="text">image: backend</span>
+                    <span class="text">ports:</span>
+                    <span class="text">- 4003:4000</span>
+                    <span class="text">env_file:</span>
+                    <span class="text">- .env</span>
+                    <span class="text">command: ["npm", "run", "start"]</span>
+                    <span class="text">volumes:</span>
+                    <span class="text">- ~/uploads:/app/backend/uploads</span>
+                </code>
+                <p>
+                    Build new image and make sure you are in the root directory of the codebase where 
+                    Dockerfile and docker-compose.yml are located.
+                </p>
+                <code class="dark-box">
+                    <p class="text">docker build -t backend .</p>
+                </code>
+                <p>Build containers using compose file.</p>
+                <code class="dark-box">
+                    <span class="text">docker compose up -d</span>
+                </code>
+                <p>
+                    Docker compose generates multiple containers or instances of the backend denpending on
+                    the number of containers declared in docker compose yml file.
+                </p>
+                <p>Restart Nginx & Mysql</p>
+                <code class="dark-box">
+                    <span class="text">sudo systemctl restart nginx</span>
+                    <span class="text">sudo systemctl restart mariadb</span>
                 </code>
             </article>
         </section>
