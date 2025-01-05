@@ -213,52 +213,52 @@
                 <p>Nginx configuration file</p>
                 <code class="dark-box">
                     <span class="text">user www-data;</span>
-                    <span class="text">worker_processes auto;<span>
+                    <span class="text">worker_processes auto;</span>
                     <span class="text">pid /run/nginx.pid;</span>
                     <span class="text">include /etc/nginx/modules-enabled/*.conf;</span>
                     <br/>
                     <span class="text">events {</span>
-                    <span class="text tab">worker_connections 768;</span>
+                    <span class="text tab_4_1">worker_connections 768;</span>
                     <span class="text">}</span>
                     <br/>
                     <span class="text">http {</span>
-                    <span class="text tab">include /etc/nginx/mime.types;</span>
-                    <span class="text tab">default_type application/octet-stream;</span>
+                    <span class="text tab_4_1">include /etc/nginx/mime.types;</span>
+                    <span class="text tab_4_1">default_type application/octet-stream;</span>
                     <br/>
-                    <span class="text tab">upstream backendserver {</span>
-                    <span class="text tab2">server 127.0.0.1:4001;</span>
-                    <span class="text tab2">server 127.0.0.1:4002;</span>
-                    <span class="text tab2">server 127.0.0.1:4003;</span>
-                    <span class="text tab">}</span>
+                    <span class="text tab_4_1">upstream backendserver {</span>
+                    <span class="text tab_4_2">server 127.0.0.1:4001;</span>
+                    <span class="text tab_4_2">server 127.0.0.1:4002;</span>
+                    <span class="text tab_4_2">server 127.0.0.1:4003;</span>
+                    <span class="text tab_4_1">}</span>
                     <br/>
-                    <span class="text tab">server {</span>
-                    <span class="text tab2">listen 80;</span>
-                    <span class="text tab2">server_name your_domain_name.com;</span>
+                    <span class="text tab_4_1">server {</span>
+                    <span class="text tab_4_2">listen 80;</span>
+                    <span class="text tab_4_2">server_name your_domain_name.com;</span>
                     <br/>
-                    <span class="text tab2"># Redirect HTTP to HTTPS</span>
-                    <span class="text tab2">return 301 https://$host$request_uri;</span>
-                    <span class="text tab">}</span>
+                    <span class="text tab_4_2"># Redirect HTTP to HTTPS</span>
+                    <span class="text tab_4_2">return 301 https://$host$request_uri;</span>
+                    <span class="text tab_4_1">}</span>
                     <br/>
-                    <span class="text tab">server {</span>
-                    <span class="text tab2">listen 443 ssl http2;</span>
-                    <span class="text tab2">server_name your_domain_name.com;</span>
+                    <span class="text tab_4_1">server {</span>
+                    <span class="text tab_4_2">listen 443 ssl http2;</span>
+                    <span class="text tab_4_2">server_name your_domain_name.com;</span>
                     <br/>
-                    <span class="text tab2">ssl_certificate /etc/letsencrypt/live/your_domain_name.com/fullchain.pem;</span>
-                    <span class="text tab2">ssl_certificate_key /etc/letsencrypt/live/your_domain_name.com/privkey.pem;</span>
-                    <span class="text tab2">include /etc/letsencrypt/options-ssl-nginx.conf;</span>
-                    <span class="text tab2">ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;</span>
+                    <span class="text tab_4_2">ssl_certificate /etc/letsencrypt/live/your_domain_name.com/fullchain.pem;</span>
+                    <span class="text tab_4_2">ssl_certificate_key /etc/letsencrypt/live/your_domain_name.com/privkey.pem;</span>
+                    <span class="text tab_4_2">include /etc/letsencrypt/options-ssl-nginx.conf;</span>
+                    <span class="text tab_4_2">ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;</span>
                     <br/>
-                    <span class="text tab2"># Enforce HTTPS and secure headers</span>
-                    <span class="text tab2">add_header Strict-Transport-Security "max-age=31536000; includeSubDomains; preload" always;</span>
+                    <span class="text tab_4_2"># Enforce HTTPS and secure headers</span>
+                    <span class="text tab_4_2">add_header Strict-Transport-Security "max-age=31536000; includeSubDomains; preload" always;</span>
                     <br/>
-                    <span class="text tab2">location / {</span>
-                    <span class="text tab3">proxy_pass http://backendserver;</span>
-                    <span class="text tab3">proxy_set_header Host $host;</span>
-                    <span class="text tab3">proxy_set_header X-Real-IP $remote_addr;</span>
-                    <span class="text tab3">proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</span>
-                    <span class="text tab3">proxy_set_header X-Forwarded-Proto $scheme;</span>
-                    <span class="text tab2">}</span>
-                    <span class="text tab">}</span>
+                    <span class="text tab_4_2">location / {</span>
+                    <span class="text tab_4_3">proxy_pass http://backendserver;</span>
+                    <span class="text tab_4_3">proxy_set_header Host $host;</span>
+                    <span class="text tab_4_3">proxy_set_header X-Real-IP $remote_addr;</span>
+                    <span class="text tab_4_3">proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</span>
+                    <span class="text tab_4_3">proxy_set_header X-Forwarded-Proto $scheme;</span>
+                    <span class="text tab_4_2">}</span>
+                    <span class="text tab_4_1">}</span>
                     <span class="text">}</span>
                 </code>
                 <p>Keep in mind to replace the placeholder your_domain_name.com with your actual domain name.</p>
@@ -268,9 +268,9 @@
                 </p>
                 <code class="dark-box">
                     <span class="text">upstream backendserver {</span>
-                    <span class="text tab">server 127.0.0.1:1111;</span>
-                    <span class="text tab">server 127.0.0.1:2222;</span>
-                    <span class="text tab">server 127.0.0.1:3333;</span>
+                    <span class="text tab_4_1">server 127.0.0.1:1111;</span>
+                    <span class="text tab_4_1">server 127.0.0.1:2222;</span>
+                    <span class="text tab_4_1">server 127.0.0.1:3333;</span>
                     <span class="text">}</span>
                 </code>
                 <p>Verify the nginx configuration syntax.</p>

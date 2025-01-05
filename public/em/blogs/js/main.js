@@ -3,5 +3,5 @@ import { copySyntax } from './copy-syntax.js';
 import { tab } from './tab.js';
 
 selectImage();
-copySyntax();
 tab();
+copySyntax();
