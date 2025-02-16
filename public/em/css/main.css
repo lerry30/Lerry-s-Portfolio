@@ -82,16 +82,13 @@ body {
     right: 0;
     bottom: 0;
     z-index: 3;
-
-    display: flex;
-    min-height: 200vh; /* <- */
 }
 
 .loading-background svg {
     position: relative;
-    top: calc(50%);
+    top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, 0);
 }
 
 .loading-background svg path:nth-child(1) {

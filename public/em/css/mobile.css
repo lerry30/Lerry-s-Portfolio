@@ -260,6 +260,7 @@ main {
 .about .about-content img {
     margin: 0 10px 10px;
     width: 90%;
+    max-width: 400px;
     aspect-ratio: 1;
     object-fit: cover;
     object-position: 0 0;
