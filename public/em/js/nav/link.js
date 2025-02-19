@@ -39,6 +39,8 @@ export const scrollPage = () => {
             const top = sections[nameOfSection].yPos - paddingTop; // subtract so scroll it a bit to top
             scrollTo(0, top);
 
+            console.log('What happened');
+
             setHighLightColor(link);
         });
     }
@@ -49,7 +51,6 @@ export const highLightNavLink = () => { // hightlight the text or nav link if it
         const nameOfSection = Object.keys(link.dataset)[0];
         const sectionProps = sections[nameOfSection];
         const top = Math.abs(sectionProps?.element?.getBoundingClientRect()?.top);
-
         
         if(top < sectionProps.half) {
             setHighLightColor(link);
