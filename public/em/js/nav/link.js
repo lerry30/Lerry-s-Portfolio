@@ -39,8 +39,6 @@ export const scrollPage = () => {
             const top = sections[nameOfSection].yPos - paddingTop; // subtract so scroll it a bit to top
             scrollTo(0, top);
 
-            console.log('What happened');
-
             setHighLightColor(link);
         });
     }
