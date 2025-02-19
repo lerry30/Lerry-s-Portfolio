@@ -4,8 +4,6 @@ import { toggleSidePos, resetSideBarPos } from './mobile/sidebar.js';
 
 import Throttle from './utils/throttle.js';
 
-console.log('is javascript working?');
-
 scrollPageCalc(); // setting page section properties
 scrollPage(); // scroll page section to display on screen when nav link is selected from nav bar
 sendMessage(); // send message for contact section
