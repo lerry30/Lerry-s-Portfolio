@@ -66,6 +66,12 @@ body {
     height: 25px;
 }
 
+/* hightlighted with */
+.text-highlight {
+    font-size: 16px;
+    color: var(--txt-highlight);
+}
+
 .background { /* canvas */
     background-color: pink;
     width: 100%;

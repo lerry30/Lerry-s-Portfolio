@@ -23,12 +23,14 @@ app.use('/js', express.static(path.join(__dirname, 'public/em/js')));
 app.use(express.static(path.join(__dirname, 'public/em/')));
 app.use(express.static(path.join(__dirname, 'public/em/blogs/node-server-min-setup.html')));
 
+// backend request
+const useRoute = require('./routes/messageRoutes');
+app.use('/api', useRoute);
+
+// serve frontend
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'public/em/index.html'));
 });
-
-const useRoute = require('./routes/messageRoutes');
-app.use('/api', useRoute);
 
 connectDB().then(() => {
     app.listen(PORT, () => {
