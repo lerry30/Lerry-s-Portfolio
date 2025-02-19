@@ -23,7 +23,7 @@ app.use(express.static(path.join(__dirname, 'public/em/')));
 app.use(express.static(path.join(__dirname, 'public/em/blogs/node-server-min-setup.html')));
 
 const useRoute = require('./routes/messageRoutes');
-app.use(useRoute);
+app.use('/api', useRoute);
 
 connectDB().then(() => {
     app.listen(PORT, () => {
