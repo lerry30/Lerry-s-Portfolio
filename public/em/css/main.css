@@ -78,7 +78,7 @@ body {
     position: fixed;
     z-index: -2;
 
-    filter: blur(5px);
+    filter: blur(8px);
     background-color: #03182511;
 }
 

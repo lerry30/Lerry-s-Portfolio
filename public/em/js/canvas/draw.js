@@ -33,7 +33,8 @@ export const canvasDraw = () => {
 }
 
 function update() {
-    context.clearRect(-width/2, -height/2, width, height);
+    context.fillStyle = '#03182547';
+    context.fillRect(-width/2, -height/2, width, height);
     for(let i = 0; i < noOfShapes; i++) {
         const shape = shapes[i];
         const perspective = fl / (fl + shape.z);
