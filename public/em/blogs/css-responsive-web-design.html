@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Responsive Web Design with Media Queries</title>
+    <link rel="icon" type="image/x-icon" href="../img/favicon.ico">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/mobile.css">
+    <link rel="stylesheet" href="css/desktop.css">
+    <script type="module" src="js/main.js" defer></script>
+</head>
+<body>
+    <template id="template-copy-button">
+        <button class="copy-button">
+            <svg 
+                xmlns="http://www.w3.org/2000/svg" 
+                width="20" 
+                height="20" 
+                viewBox="0 0 24 24" 
+                fill="none" 
+                stroke="currentColor" 
+                stroke-width="2" 
+                stroke-linecap="round" 
+                stroke-linejoin="round" 
+                class="copy"
+            >
+                <rect width="14" height="14" x="8" y="8" rx="2" ry="2"/>
+                <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/>
+            </svg>
+            <svg 
+                xmlns="http://www.w3.org/2000/svg" 
+                width="20" 
+                height="20" 
+                viewBox="0 0 24 24" 
+                fill="none" 
+                stroke="currentColor" 
+                stroke-width="2" 
+                stroke-linecap="round" 
+                stroke-linejoin="round" 
+                class="copied"
+            >
+                <path d="M18 6 7 17l-5-5"/>
+                <path d="m22 10-7.5 7.5L13 16"/>
+            </svg>
+        </button>
+    </template>
+    <main class="content">
+        <header>
+            <h1>CSS Responsive Web Design Using Media Queries</h1>
+
+<p>Creating websites requires responsive design, meaning the layout and styling should adapt to the device's screen size. Originally, web design targeted desktop PCs only, but with the variety of devices and screen sizes today, web development has evolved. Media queries are a key tool for achieving this adaptability.</p>
+
+<h2>Common Size Units in CSS</h2>
+<p>Here are some common units used in responsive design:</p>
+<ul>
+    <li><strong>px</strong> (pixels)</li>
+    <li><strong>%</strong> (percentage)</li>
+    <li><strong>rem</strong> (root em, relative to the root element's font size)</li>
+    <li><strong>vw</strong> (viewport width)</li>
+    <li><strong>vh</strong> (viewport height)</li>
+    <li>and more</li>
+</ul>
+
+<h2>Understanding Media Queries</h2>
+<p>Media queries allow you to adjust page content based on conditions like screen width. Here's an example:</p>
+
+<code class="dark-box">
+    <span class="text">.box {<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;background-color: blue;<br>
+    }<br>
+    <br>
+    @media (max-width: 576px) {<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;.box {<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;background-color: red;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+    }</span>
+</code>
+
+<p>This means the background color of elements with the class <code>.box</code> is blue for screens wider than 576px and red for screens 576px or smaller.</p>
+
+<p>You can define any breakpoints based on your target devices. Here are some common ones:</p>
+<ul>
+    <li><strong>Max-width: 576px</strong> - Mobile devices in portrait mode</li>
+    <li><strong>Max-width: 768px</strong> - Mobile devices in landscape mode</li>
+    <li><strong>Max-width: 1024px</strong> - Tablets</li>
+    <li><strong>Max-width: 1280px</strong> - Small laptops</li>
+    <li><strong>Max-width: 1536px</strong> - Large monitors</li>
+</ul>
+
+<!-- Image Suggestion 1 -->
+<p><em>Image Suggestion: A comparison graphic showing a website layout on different devices (desktop, tablet, phone) with labeled breakpoints.</em></p>
+
+<h2>Example: Adjusting Font Size</h2>
+<p>In this example, the font size changes for screens smaller than 576px:</p>
+
+<code class="dark-box">
+    <span class="text">.heading {<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;font-size: 20px;<br>
+    }<br>
+    <br>
+    @media (max-width: 576px) {<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;.heading {<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;font-size: 18px;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+    }</span>
+</code>
+
+<p>For small projects, managing all styles in one CSS file with media queries at the bottom can become unwieldy. This is where the <code>rem</code> unit shines, reducing redundant style definitions across breakpoints.</p>
+
+<h2>The Power of REM Units</h2>
+<p>By default, 1 <code>rem</code> equals 16px and is tied to the root element's font size (the <code>&lt;html&gt;</code> tag). Adjusting the root font size affects all elements using <code>rem</code>, as they inherit from the root.</p>
+
+<p>Here’s how to set the root font size:</p>
+
+<code class="dark-box">
+    <span class="text">/* Root element */<br>
+    html {<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;font-size: 62.5%; /* 10px when default browser font size is 16px */<br>
+    }</span>
+</code>
+
+<p><strong>Note:</strong> I corrected <code>0.625%</code> to <code>62.5%</code>, as the original value was likely a typo. 62.5% of 16px (the default browser font size) equals 10px, a common base for <code>rem</code> calculations.</p>
+
+<p>Browser font size settings can vary (e.g., small: 12px, medium: 16px, large: 24px), so using a percentage ensures proportionality. Adjust the root font size at different breakpoints like this:</p>
+
+<code class="dark-box">
+    <span class="text">/* Large screens - 1536px */<br>
+    @media (max-width: 96rem) {<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;html {<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;font-size: 62.5%; /* 10px */<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+    }<br>
+    <br>
+    /* Large laptops - 1280px */<br>
+    @media (max-width: 80rem) {<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;html {<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;font-size: 56.3%; /* ~9px */<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+    }<br>
+    <br>
+    /* Small laptops - 1024px */<br>
+    @media (max-width: 64rem) {<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;html {<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;font-size: 50%; /* 8px */<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+    }<br>
+    <br>
+    /* Phone landscape - 768px */<br>
+    @media (max-width: 48rem) {<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;html {<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;font-size: 43.8%; /* ~7px */<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+    }<br>
+    <br>
+    /* Phone portrait - 576px */<br>
+    @media (max-width: 36rem) {<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;html {<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;font-size: 37.5%; /* 6px */<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+    }</span>
+</code>
+
+<p>This demonstrates the power of <code>rem</code>: adjust one property, and all <code>rem</code>-based styles scale accordingly.</p>
+
+<!-- Image Suggestion 2 -->
+<p><em>Image Suggestion: A diagram illustrating how rem units scale elements (e.g., font size, padding) across breakpoints based on the root font size.</em></p>
+
+<h2>Common CSS Properties Using REM</h2>
+<p>Properties where <code>rem</code> is most effective:</p>
+<ul>
+    <li><code>font-size</code></li>
+    <li><code>padding</code></li>
+    <li><code>margin</code></li>
+    <li><code>width</code></li>
+    <li><code>height</code></li>
+</ul>
+
+<p>For some properties, resizing doesn’t significantly improve responsiveness, so I prefer fixed units like <code>px</code>:</p>
+<ul>
+    <li><code>border-width</code></li>
+    <li><code>border-radius</code></li>
+</ul>
+
+<h2>Conclusion</h2>
+<p>Using <code>rem</code> units simplifies responsive design. By adjusting a single root property, you can efficiently scale your layout across devices—making your CSS cleaner and more manageable!</p>
+
+<!-- Image Suggestion 3 -->
+<p><em>Image Suggestion: A before-and-after screenshot of a webpage using px vs. rem units, highlighting the scalability difference.</em></p>
+        </header>
+    </main>
+</body>
+</html>
