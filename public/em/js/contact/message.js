@@ -17,7 +17,7 @@ export const sendMessage = () => {
 }
 
 function contactForm() {
-    const url = 'https://samson.lerry.site/api/newmessage';
+    const url = 'https://lerry.milkyway.sbs/api/newmessage';
     //const url = '/newmessage';
 
     const sendMessageWithInfo = async (ev) => {
