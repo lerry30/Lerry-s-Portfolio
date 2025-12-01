@@ -6,11 +6,15 @@
       "use": "@vercel/node"
     },
     {
-      "src": "public/**",
+      "src": "public/em/**",
       "use": "@vercel/static"
     }
   ],
   "routes": [
+    {
+      "src": "/js/(.*)",
+      "dest": "/public/em/js/$1"
+    },
     {
       "handle": "filesystem"
     },
