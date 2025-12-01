@@ -10,7 +10,7 @@
       "use": "@vercel/static"
     },
     {
-      "src": "public/em/blogs",
+      "src": "public/em/blogs/**",
       "use": "@vercel/static"
     }
   ],
