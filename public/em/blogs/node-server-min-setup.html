@@ -56,7 +56,7 @@
             <article>
                 <p>
                     Learn to set up a Node.js server using cutting-edge tools like Docker, 
-                    Nginx, and Let's Encrypt. Unlike traditional app deployment methods, 
+                    Nginx and Let's Encrypt. Unlike traditional app deployment methods, 
                     this guide walks you through the step-by-step process of deploying from 
                     scratch. It offers a deeper understanding of how things work and gives 
                     you full control over your setup. While it may lack some advanced production-grade 
@@ -111,6 +111,7 @@
                 <code class="dark-box">
                     <span class="text">ip addr</span>
                 </code>
+
                 <p>
                     In the DNS records section, add a new 'A' record and configure a subdomain for 'CNAME' entries. 
                     Provide the IP address and set the TTL (Time to Live) to a lower value, such as 300. This allows 
@@ -124,7 +125,7 @@
             <article>
                 <h2>Remove Password Authentication on SSH</h2>
                 <p>
-                    This allows specific device to SSH without verifying your credential. So it makes SSH easier to
+                    This allows a specific device to SSH without verifying your credentials. So it makes SSH easier to
                     connect remotely.
                 </p>
                 <code class="dark-box">
@@ -134,13 +135,13 @@
             <article>
                 <h2>Hardening SSH</h2>
                 <p>
-                    Edit these configuration files to ensure default settings are not obviously easy to gained access
-                    by attackers.
+                    Edit these configuration files to ensure default settings are not easily accessible by attackers.
                 </p>
                 <code class="dark-box">
                     <span class="text">sudo vim /etc/ssh/sshd_config</span>
                 </code>
-                <p>Find each fields and set the proper values.</p>
+
+                <p>Find each field and set the proper values.</p>
                 <code class="dark-box">
                     <span class="text">PasswordAuthentication no</span>
                 </code>
@@ -150,31 +151,37 @@
                 <code class="dark-box">
                     <span class="text">UsePAM no</span>
                 </code>
-                <p>Modify this config file if exists.</p>
+
+                <p>Modify this config file if it exists.</p>
                 <code class="dark-box">
                     <span class="text">sudo vim /etc/ssh/sshd_config.d/50-cloud-init.conf</span>
                 </code>
+
                 <p>Set this field to no or just remove it.</p>
                 <code class="dark-box">
                     <span class="text">PasswordAuthentication no</span>
                 </code>
+
                 <p>Restart the SSH daemon service to apply changes.</p>
                 <code class="dark-box">
                     <span class="text">sudo systemctl reload ssh</span>
                 </code>
-                <p>Verify if user root able access remotely.</p>
+
+                <p>Verify if the user "root" is able to access remotely.</p>
                 <code class="dark-box">
                     <span class="text">ssh root@111.222.33.444</span>
                 </code>
-                <p>If the output is "Permission denied(publickey)", congrats since the openssh is now hardened.</p>
+
+                <p>If the output is "Permission denied(publickey)", congrats since OpenSSH is now hardened.</p>
             </article>
             <article>
                 <h2>Utilized Domain Name Instead of IP Address</h2>
-                <p>Double check for domain name using nslookup</p>
+                <p>Double-check for the domain name using nslookup</p>
                 <code class="dark-box">
                     <span class="text">nslookup your_domain_name.com</span>
                 </code>
-                <p>Then, now use it for ssh since IP address is forgettable</p>
+
+                <p>Then, now use it for ssh since the IP address is forgettable.</p>
                 <code class="dark-box">
                     <span class="text">ssh your_user_name@your_domain_name.com</span>
                 </code>
@@ -189,8 +196,7 @@
             </header>
             <article>
                 <p>
-                    In this case I will used nginx as my reverse proxy server. It doesn't automatically generates
-                    ssl certificate for https. Typically nginx used Let's Encrypt to issue a free ssl certificate.
+                    In this case, I will use nginx as my reverse proxy server. It doesn't automatically generate an ssl certificate for https. Typically, nginx uses Let's Encrypt to issue a free ssl certificate.
                 </p>
             </article>
             <article>
@@ -202,14 +208,17 @@
                 <code class="dark-box">
                     <span class="text">sudo apt install certbot python3-certbot-nginx</span>
                 </code>
-                <p>Obtain ssl certificate.</p>
+
+                <p>Obtain an ssl certificate.</p>
                 <code class="dark-box">
                     <span class="text">sudo certbot --nginx -d your_domain_name.com</span>
                 </code>
+
                 <p>Nginx ssl configuration.</p>
                 <code class="dark-box">
                     <span class="text">sudo vim /etc/nginx/nginx.conf</span>
                 </code>
+
                 <p>Nginx configuration file</p>
                 <code class="dark-box">
                     <span class="text">user www-data;</span>
@@ -261,10 +270,10 @@
                     <span class="text tab_4_1">}</span>
                     <span class="text">}</span>
                 </code>
+
                 <p>Keep in mind to replace the placeholder your_domain_name.com with your actual domain name.</p>
                 <p>
-                    Additionally since docker will utilized for round-robin algorithm in this setup ports are essential 
-                    later for docker setup.
+                    Additionally, since docker will be utilized for the round-robin algorithm in this setup, ports are essential later for the docker setup.
                 </p>
                 <code class="dark-box">
                     <span class="text">upstream backendserver {</span>
@@ -273,6 +282,7 @@
                     <span class="text tab_4_1">server 127.0.0.1:3333;</span>
                     <span class="text">}</span>
                 </code>
+
                 <p>Verify the nginx configuration syntax.</p>
                 <code class="dark-box">
                     <span class="text">sudo nginx -t</span>
@@ -295,6 +305,7 @@
                 <code class="dark-box">
                     <span class="text">sudo apt install mariadb-server -y</span>
                 </code>
+
                 <p>Start & enable mariadb</p>
                 <code class="dark-box">
                     <span class="text">sudo systemctl start mariadb</span>
@@ -304,45 +315,52 @@
             </article>
             <article>
                 <h2>Clean Up Mysql</h2>
-                <p>Modify mysql root user password.</p>
+                <p>Modify the mysql root user password.</p>
                 <code class="dark-box">
                     <span class="text">sudo mysql -u root</span>
                     <span class="text">ALTER USER 'root'@'localhost' IDENTIFIED BY 'root_password';</span>
                 </code>
-                <p>Display the authentication method as well as host perminssion for root user.</p>
+
+                <p>Display the authentication method as well as host permissions for the root user.</p>
                 <code class="dark-box">
                     <span class="text">SELECT User, Host, plugin FROM mysql.user WHERE User='root';</span>
                 </code>
-                <p>Lists all anonymous user without actual username.</p>
+
+                <p>Lists all anonymous users without an actual username.</p>
                 <code class="dark-box">
                     <span class="text">SELECT User, Host FROM mysql.user WHERE User='';</span>
                 </code>
-                <p>Clean up by deleting anonymous users(' ') associated with specific host.</p>
+
+                <p>Clean up by deleting anonymous users(' ') associated with a specific host.</p>
                 <code class="dark-box">
                     <span class="text">DROP USER ''@'host';</span>
                     <span class="text">DROP USER ''@'localhost';</span>
                     <span class="text">DROP USER ''@'127.0.0.1';</span>
                     <span class="text">DROP USER ''@'::1';</span>
                 </code>
-                <p>Delete unnecessary database 'test' if exist</p>
+
+                <p>Delete all unnecessary databases, like 'test', if they exist.</p>
                 <code class="dark-box">
                     <span class="text">DROP TABLE IF EXIST test;</span>
                 </code>
-                <p>Remove references to database named test or similar in mysql internal records.</p>
+
+                <p>Remove references to the database named test or similar in mysql internal records.</p>
                 <code class="dark-box">
                     <span class="text">DELETE FROM mysql.db WHERE Db = 'test' OR Db LIKE 'test\_%';</span>
                 </code>
-                <p>Reloads the privilege tables to ensure changes will took effect immedietely.</p>
+
+                <p>Reloads the privilege tables to ensure changes will take effect immediately.</p>
                 <code class="dark-box">
                     <span class="text">FLUSH PRIVILEGES;</span>
                 </code>
             </article>
             <article>
                 <h2>Configuring Mysql for Docker connection</h2>
-                <p>Setting new user and grant all privileges for specific database.</p>
+                <p>Setting a new user and granting all privileges for a specific database.</p>
                 <code class="dark-box">
                     <span class="text">CREATE USER 'user_name'@'%' IDENTIFIED BY 'password';</span>
                 </code>
+
                 <p>'user_name'@'%', the percentage sign(%) allows any IP address to connect to this user.</p>
                 <p>Grant all privileges for 'user_name' on 'database_name'</p>
                 <code class="dark-box">
@@ -350,53 +368,61 @@
                     <span class="text">GRANT ALL PRIVILEGES ON database_name.* TO 'user_name'@'%';</span>
                     <span class="text">FLUSH PRIVILEGES;</span>
                 </code>
+
                 <p>
-                    Configuring mysql to set bind address to allow access especially for docker containers to
-                    connect to it.
+                    Configuring mysql to set the bind address to allow access, especially for docker containers to connect to it.
                 </p>
                 <code class="dark-box">
                     <span class="text">sudo vim /etc/mysql/mariadb.conf.d/50-server</span>
                 </code>
-                <p>Look for bind-address directive</p>
+
+                <p>Look for the bind-address directive</p>
                 <code class="dark-box">
                     <span class="text">bind-address = 0.0.0.0</span>
                 </code>
+
                 <p>
-                    Altering the value of bind-address to 0.0.0.0 makes it accesible to any request from any 
-                    IP address.
+                    Altering the value of bind-address to 0.0.0.0 makes it accessible to any request from any IP address.
                 </p>
             </article>
             <article>
                 <h2>Assigning Timezone to Mysql and Ubuntu Server</h2>
-                <p>Check for current timezone</p>
+                <p>Check for the current timezone</p>
                 <code class="dark-box">
                     <span class="text">timedatectl</span>
                 </code>
+
                 <p>List available timezones</p>
                 <code class="dark-box">
                     <span class="text">timedatectl list-timezones</span>
                 </code>
-                <p>Set server's timezone</p>
+
+                <p>Set the server's timezone</p>
                 <code class="dark-box">
                     <span class="text">sudo timedatectl set-timezone Asia/Manila</span>
                 </code>
+
                 <p>Verify changes</p>
                 <code class="dark-box">
                     <span class="text">timedatectl</span>
                 </code>
-                <p>Sync time with NTP(optional), ensuring the server's clock sync with NTP server.</p>
+
+                <p>Sync time with NTP(optional), ensuring the server's clock syncs with the NTP server.</p>
                 <code class="dark-box">
                     <span class="text">sudo timedatectl set-ntp true</span>
                 </code>
-                <p>In mysql configuration replace or add timezone in /etc/mysql/mariadb.conf.d/50-server.conf</p>
+
+                <p>In mysql configuration, replace or add a timezone in /etc/mysql/mariadb.conf.d/50-server.conf</p>
                 <code class="dark-box">
                     <span class="text">[mysqlId]</span>
                     <span class="text">default-time-zone = '+08:00'</span>
                 </code>
+
                 <p>Save the config file and restart mysql or mariadb</p>
                 <code class="dark-box">
                     <span class="text">sudo systemctl restart mariadb</span>
                 </code>
+
                 <p>Verify mysql timezone</p>
                 <code class="dark-box">
                     <span class="text">sudo mysql -u user_name -p</span>
@@ -407,15 +433,15 @@
             <article>
                 <h2>Database Creation & Codebase Inclusion</h2>
                 <p>
-                    Start creating database, upload the web server code(including frontend server like React JS),
-                    and other requirements like configuring the .env file.
+                    Start creating a database, upload the web server code(including frontend server like React JS), and other requirements like configuring the .env file.
                 </p>
                 <p>Displaying available IP addresses of the server.</p>
                 <code class="dark-box">
                     <span class="text">hostname -I</span>
                 </code>
-                <p>Take note the IP address of mysql server which start with '172.0.0.0'.</p>
-                <p>Configuring .env file with database credentials</p>
+
+                <p>Take note of the IP address of the MySQL server, which starts with '172.0.0.0'.</p>
+                <p>Configuring the .env file with database credentials</p>
                 <code class="dark-box">
                     <span class="text">PORT='4000'</span>
                     <span class="text">DB_HOST='172.0.0.0'</span>
@@ -434,7 +460,7 @@
             </header>
             <article>
                 <p>
-                    Install docker in ubuntu server
+                    Install docker in ubuntu server: 
                     <a href="https://docs.docker.com/engine/install/ubuntu" target="_blank" rel="noopener noreferrer">
                         Docker installation guide
                     </a>
@@ -443,8 +469,7 @@
             <article>
                 <h2>Docker file & Docker compose file</h2>
                 <p>
-                    Docker file required to named as 'Dockerfile' to set the nodejs backend. Make sure that Dockerfile
-                    is place in the root directory of codebase.
+                    The Docker file is required to be named 'Dockerfile' to set the NodeJS backend. Make sure that the Dockerfile is placed in the root directory of the codebase.
                 </p>
                 <code class="dark-box">
                     <span class="text"># Dockerfile</span>
@@ -456,7 +481,8 @@
                     <span class="text">EXPOSE 4000</span>
                     <span class="text">CMD ["node", "backend/server.js"]</span>
                 </code>
-                <p>Make sure that tabs for every indentations are only 2 spaces since yml file is really sensitive.</p>
+
+                <p>Make sure that tabs for every indentation are only 2 spaces since the YAML file is really sensitive.</p>
                 <code class="dark-box">
                     <span class="text">services:</span>
                     <span class="text">backend01:</span>
@@ -487,22 +513,24 @@
                     <span class="text">volumes:</span>
                     <span class="text">- ~/uploads:/app/backend/uploads</span>
                 </code>
+
                 <p>
-                    Build new image and make sure you are in the root directory of the codebase where 
+                    Build a new image and make sure you are in the root directory of the codebase where 
                     Dockerfile and docker-compose.yml are located.
                 </p>
                 <code class="dark-box">
                     <p class="text">docker build -t backend .</p>
                 </code>
-                <p>Build containers using compose file.</p>
+
+                <p>Build containers using the compose file.</p>
                 <code class="dark-box">
                     <span class="text">docker compose up -d</span>
                 </code>
                 <p>
-                    Docker compose generates multiple containers or instances of the backend denpending on
-                    the number of containers declared in docker compose yml file.
+                    Docker compose generates multiple containers or instances of the backend depending on the number of containers declared in the docker compose yml file.
                 </p>
-                <p>Restart Nginx & Mysql</p>
+
+                <p>Restart Nginx & MySQL</p>
                 <code class="dark-box">
                     <span class="text">sudo systemctl restart nginx</span>
                     <span class="text">sudo systemctl restart mariadb</span>

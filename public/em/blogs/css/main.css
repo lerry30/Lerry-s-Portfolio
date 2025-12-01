@@ -138,6 +138,8 @@ hr {
     font-weight: bold;
     text-align: center;
     cursor: pointer;
+    line-height: 1.2;
+    font-size: 1.4rem;
 }
 
 /* ---------------------------------------------- CODE, CONFIG AND COMMAND DESIGN ----------------------------------------------------*/
