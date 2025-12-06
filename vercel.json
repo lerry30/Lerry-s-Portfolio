@@ -12,6 +12,14 @@
   ],
   "routes": [
     {
+      "src": "/blogs/js/(.*)",
+      "dest": "/public/em/blogs/js/$1"
+    },
+    {
+      "src": "/js/(.*)",
+      "dest": "/public/em/js/$1"
+    },
+    {
       "handle": "filesystem"
     },
     {
