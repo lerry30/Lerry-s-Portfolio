@@ -4,21 +4,9 @@
     {
       "src": "index.js",
       "use": "@vercel/node"
-    },
-    {
-      "src": "public/em/**",
-      "use": "@vercel/static"
-    },
-    {
-      "src": "public/em/blogs/**",
-      "use": "@vercel/static"
     }
   ],
   "routes": [
-    {
-      "src": "/js/(.*)",
-      "dest": "/public/em/js/$1"
-    },
     {
       "handle": "filesystem"
     },
