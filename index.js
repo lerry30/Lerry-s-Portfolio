@@ -18,7 +18,7 @@ const connectDB = async () => {
 }
 
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+//app.use(express.urlencoded({ extended: false }));
 
 app.use('/js', express.static(path.join(__dirname, 'public/em/js')))
 app.use(express.static(path.join(__dirname, 'public/em')))
