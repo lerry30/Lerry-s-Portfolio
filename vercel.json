@@ -8,6 +8,10 @@
   ],
   "routes": [
     {
+      "src": "/js/(.*)",
+      "dest": "/public/em/js/$1"
+    },
+    {
       "handle": "filesystem"
     },
     {
