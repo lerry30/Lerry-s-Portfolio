@@ -580,14 +580,14 @@ The fmt package uses format codes reminiscent of C.
 
 **%d** &nbsp;&nbsp;&nbsp;&nbsp; base 10.<br>
 **%x** &nbsp;&nbsp;&nbsp;&nbsp; base 16, with lower-case letters for a-f.<br>
-**%f** &nbsp;&nbsp;&nbsp;&nbsp; decimal point but no exponent, e.g. 123.456<br>
-**%t** &nbsp;&nbsp;&nbsp;&nbsp; the word true or false.
+**%f** &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; decimal point but no exponent, e.g. 123.456<br>
+**%t** &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; the word true or false.
 
 **%v** &nbsp;&nbsp;&nbsp;&nbsp; the value in a default format when printing structs, the plus flag(%+v) adds field names.<br>
-**%#v** &nbsp;&nbsp;&nbsp; a Go-syntax representation of the value.<br>
+**%#v** &nbsp;&nbsp; a Go-syntax representation of the value.<br>
 **%T** &nbsp;&nbsp;&nbsp;&nbsp; a Go-syntax representation of the type of the value.
 
-**%%** &nbsp;&nbsp;&nbsp;&nbsp; a literal percent sign; consumes no value[escape]
+**%%** &nbsp;&nbsp;&nbsp; a literal percent sign; consumes no value[escape]
 
 *Read the godoc.*
 
@@ -612,11 +612,12 @@ fmt.Printf("|%-6d|%-6d|\n", a, b)
 fmt.Printf("|%6f|%6.2f|\n", c, d)
 ```
 
-Output:
-	|         12|       345|
+**Output:**
+
+	|    12|   345|
 	|000012|000345|
-	|12         |345       |
-	|1.200000|       3.45|
+	|12    |345   |
+	|1.200000|   3.45|
 
 The pipe symbols act as a border to create a layout for the table, while the %d represents an integer, and adding additional details like 6 in between % and d will define another way to format the string, so 6 represents a minimum of 6 characters allowed in a cell; therefore, the result will create space before the integer and make it justified to the right.
 
@@ -626,15 +627,18 @@ The negative sign(%-6d) for 6 justifies the text to the left.
 
 Percent f (%f) represents a floating number, and this format will display up to 6 decimal places. So to format this number, add .2(%.2f) in between displays 2 decimal places only. And to justify the text to the right with 6 characters allowed, insert 6 before .2 like %6.2f to make them neat. But neglecting to specify the number of decimals to show causes the table to break down, even though only 6 characters are allowed in a cell.
 
-Slice
+### Slice
 
+```go
 s := []int{1, 2, 3}
 
 fmt.Printf("%T\n", s)
 fmt.Printf("%v\n", s)
 fmt.Printf("%#v\n", s)
+```
 
-Output:
+**Output:**
+
 	[]int
 	[1, 2, 3]
 	[]int{1, 2, 3}
@@ -647,16 +651,19 @@ While the %v represents the values of the slice, the format is not like JSON, wh
 
 Adding the pound sign %#v helps to visualize the entirety of the object. This prints out the type and values of the slice. And this is the most useful placeholder among them, since it provides all the details that we need.
 
-Array of runes
+### Array of runes
 
+```go
 a := [3]run{ 'a', 'b', 'c' }
 
 fmt.Printf("%T\n", a)
 fmt.Printf("%v\n", a)
 fmt.Printf("%#v\n", a)
 fmt.Printf("%q\n", a)
+```
 
-Output:
+**Output:**
+
 	[3]int32
 	[97 98 99]
 	[3]int32{ 97, 98, 98}
@@ -674,21 +681,25 @@ So it's just a way of mapping characters based on a specific number.
 
 Percent Q(%q) displays the actual characters in that array of runes.
 
-Map
+### Map
 
+```go
 m := map[string]int{ "and": 1, "or": 2 }
 
 fmt.Printf("%T\n", m)
 fmt.Printf("%v\n", m)
 fmt.Printf("%#v\n", m)
+```
 
-Output:
+**Output:**
+
 	map[string]int
 	map[and:1  or:2]
 	map[string]int{ "and": 1, "or": 2 }
 
-String & Bytes
+### String & Bytes
 
+```go
 s := "a string"
 b := []byte(s)
 
@@ -696,20 +707,28 @@ fmt.Printf("%T\n", s)	// string
 fmt.Printf("%q\n", s)	// "a string"
 fmt.Printf("%v\n", s)	// a string
 fmt.Printf("%#v\n", s)	// "a string"
+```
 
+```go
 fmt.Printf("%v\n", s)
-Output:
+```
+**Output:**
+
 	[97 32 115 116 114 105 110 103]
 
 So you'll come across where the string is in the form of bytes, and printing out its values is not ideal, since it will just show up as a slice of bytes, but behind that is just the representation of runes of characters, and you'll have to manually cast that bytes back to a string.
 
+```go
 fmt.Printf("%v\n", string(b))
-Output:
+```
+
+**Output:**
+
 	a string
 
-So here, the bytes is converted back into a string using string function.
+So here, the bytes is converted back into a string using the string function.
 
-File I/O
+### File I/O
 The package os has functions to open or create files, list directories, etc., and host the file type.
 
 Package io has utilities to read and write; bufio provides the buffered I/O scanners, etc.
@@ -720,6 +739,7 @@ Package strconv has utilities to convert to/from string representations.
 
 Here's a simple program similar to the cat command that prints out the content of any given file.
 
+```go
 package main
 
 import (
@@ -745,11 +765,13 @@ func main() {
 		file.Close()
 	}
 }
+```
 
 This program allows you to input file names or file paths, read and save the content, and print it out. This is possible using these functions, os.Open(), io.Copy() and os.Stdout, so the os.Open() as what this function name implies, that it will open the file, io.Copy() gets all the file contents and saves it to os.Stdout.
 
 Example of running this program and input files:
 
+```bash
 $ go run . examplefile.txt
 
 	output text
@@ -761,6 +783,7 @@ $ go run . *.txt
 	output text 3
 
 $ go run . *.txt > newfile.txt
+```
 
 As you can see, the "output text" is the content of a .txt file from the first example.
 
@@ -768,23 +791,28 @@ The second example uses *.txt to capture all .txt files in the same directory. T
 
 The last example, transfer the data from os.Stdout to a file, so it will automatically create a file and paste the contents.
 
-Reading a file
+### Reading a file
 What's going on here?
 
+```go
 if f, err := os.Open(fname); err != nil {
 	fmt.Fprintln(os.Stderr, "bad file: ", err)
 }
+```
 
 We often call functions whose 2nd return value is a possible error.
 
-	func Open(name string) (*File, error)
+```go
+func Open(name string) (*File, error)
+```
 
 where the error can be compared to nil, meaning no error
 
-Always check the error - the file might not really be open!
+***Always check the error*** - *the file might not really be open!*
 
-Read the number of bytes of files.
+### Read the number of bytes of files.
 
+```go
 package main
 
 import (
@@ -813,18 +841,22 @@ func main() {
 		file.Close()
 	}
 }
+```
 
+```bash
 $ go run . *.txt
 
 	The file has 23 bytes
 	The file has 25 bytes
 	The file has 17 bytes
 	The file has 65 bytes
+```
 
 The concept of the Unix file system is that every file is a file of bytes, and that makes it easy to deal with files. In this program, we are using ioutil.ReadAll(), which helps to read the entire file at once and return the data in slice of bytes along with the error. This should not be used to read a huge file like a terabyte since we don't have that size of RAM to deal with.
 
-A simple WC program
+### A simple WC program
 
+```go
 package main
 
 import (
@@ -859,7 +891,9 @@ func main() {
 		file.Close()
 	}
 }
+```
 
+```bash
 $ go run . a.txt
 
 	1	6	22	a.txt
@@ -878,6 +912,7 @@ $ wc *.txt
 	1	4	17	c.txt
 	3	15	65	d.txt
 	6	30	130	total
+```
 
 In this program, we are using bufio to read every line in a file instead of reading the file all at once, and this is great since we are trying to count the number of words, lines, and characters that a file has.
 
